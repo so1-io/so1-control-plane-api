@@ -5,13 +5,15 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# Install pnpm
+RUN npm install -g pnpm
+
 # Copy package files
-COPY package.json package-lock.json ./
+COPY package.json ./
 
 # Install dependencies
-RUN npm ci --only=production && \
-    npm ci --only=development && \
-    npm run build
+RUN pnpm install --no-optional && \
+    pnpm run build
 
 # === Runtime Stage ===
 FROM node:20-alpine
@@ -24,7 +26,7 @@ RUN apk add --no-cache dumb-init
 # Copy from builder
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./
+COPY package.json ./
 
 # Create non-root user for security
 RUN addgroup -g 1001 -S nodejs && \
