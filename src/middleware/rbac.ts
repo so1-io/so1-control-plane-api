@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { ErrorCode } from "@so1/shared";
+import { ErrorCode } from "@so1-io/shared";
 import { getAuth, requireAuth } from "./auth";
 import { throwApiError } from "./error-handler";
 

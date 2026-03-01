@@ -4,7 +4,7 @@ import { requestIdMiddleware, getRequestId } from "./middleware/request-id";
 import { loggingMiddleware } from "./middleware/logging";
 import { authMiddleware, getAuth } from "./middleware/auth";
 import { errorMiddleware, throwApiError } from "./middleware/error-handler";
-import { ErrorCode } from "@so1/shared";
+import { ErrorCode } from "@so1-io/shared";
 
 // Initialize Hono app
 const app = new Hono();

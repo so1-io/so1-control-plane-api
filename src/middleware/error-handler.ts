@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { ErrorCode, buildErrorEnvelope } from "@so1/shared";
+import { ErrorCode, buildErrorEnvelope } from "@so1-io/shared";
 import { getRequestId } from "./request-id";
 
 /**

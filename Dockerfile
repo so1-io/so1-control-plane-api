@@ -3,17 +3,30 @@
 # === Build Stage ===
 FROM node:20-alpine AS builder
 
-WORKDIR /app
+# GitHub token for installing @so1-io/shared from GitHub Packages
+ARG GITHUB_TOKEN
 
-# Install pnpm
-RUN npm install -g pnpm
+WORKDIR /app
 
 # Copy package files
 COPY package.json ./
 
+# Configure npm to use GitHub Packages for @so1-io scope
+RUN echo "@so1-io:registry=https://npm.pkg.github.com" > .npmrc && \
+    echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
+
 # Install dependencies
-RUN pnpm install --no-optional && \
-    pnpm run build
+RUN npm install
+
+# Copy source files
+COPY src ./src
+COPY tsconfig.json ./
+
+# Build TypeScript
+RUN npm run build
+
+# Clean up .npmrc (don't want token in final image)
+RUN rm -f .npmrc
 
 # === Runtime Stage ===
 FROM node:20-alpine
