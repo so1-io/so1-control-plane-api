@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  # so1-control-plane-api (BFF)
+  bff:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      N8N_API_KEY: ${N8N_API_KEY}
+      N8N_BASE_URL: ${N8N_BASE_URL}
+    volumes:
+      - ./src:/app/src
+    command: npm run dev
+    restart: unless-stopped
+
+  # so1-console (Frontend) - optional, run separately
+  # console:
+  #   build:
+  #     context: ../so1-console
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+  #     NEXT_PUBLIC_BFF_URL: http://bff:3001
+  #     CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+  #   depends_on:
+  #     - bff
+  #   restart: unless-stopped

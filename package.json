@@ -1,0 +1,26 @@
+{
+  "name": "so1-control-plane-api",
+  "version": "0.1.0",
+  "description": "Backend-for-Frontend (BFF) service for so1 Console. Brokers Clerk auth, GitHub, n8n, and MCP integrations.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint src/**/*.ts"
+  },
+  "dependencies": {
+    "@clerk/backend": "^1.15.0",
+    "hono": "^4.6.12",
+    "uuid": "^9.0.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/uuid": "^9.0.7",
+    "eslint": "^9",
+    "typescript": "^5",
+    "tsx": "^4.17.0"
+  }
+}
