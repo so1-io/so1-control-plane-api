@@ -49,19 +49,13 @@ git push heroku main
 
 ### Docker (Self-Hosted)
 
-The Docker build requires a GitHub token to install `@so1-io/shared` from GitHub Packages:
-
 ```bash
-# Build with GitHub token
-docker build \
-  --build-arg GITHUB_TOKEN=$(gh auth token) \
-  -t so1-control-plane-api .
+# Build
+docker build -t so1-control-plane-api .
 
 # Run
 docker run -p 3001:3001 -e PORT=3001 so1-control-plane-api
 ```
-
-For CI/CD, use a GitHub Actions secret or PAT with `read:packages` scope.
 
 ## Local Development
 
