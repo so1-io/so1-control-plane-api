@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "Backend-for-Frontend (BFF) service for so1 Console. Brokers Clerk auth, GitHub, n8n, and MCP integrations.",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
