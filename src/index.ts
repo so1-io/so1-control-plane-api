@@ -15,7 +15,12 @@ const app = new Hono();
 app.use(
   "*",
   cors({
-    origin: ["http://localhost:3000", "http://localhost"],
+    origin: [
+      "http://localhost:3000",
+      "http://localhost",
+      "https://console.so1.io",
+      "https://so1-console.vercel.app",
+    ],
     credentials: true,
     allowHeaders: ["Content-Type", "Authorization"],
     exposeHeaders: ["X-Request-Id"],
